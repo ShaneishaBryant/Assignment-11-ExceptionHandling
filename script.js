@@ -83,14 +83,27 @@ function vaultTest() {
         }
 }
 
-vaultTest();
+//vaultTest();
 
 
+//test program with several different inputs 
+function automaticTesting(){
+    console.log("==AUTOMATIC TESTING OF VAULT==")
 
+    const testInputs = [
+        "SECRET_123",
+        "wrong_password",
+        "",
+        123,
+        NaN,
+        undefined,
+    ];
 
+    for (const input of testInputs){
+        console.log("Testing input: " + JSON.stringify(input));
+        attemptEntry(input);
+        console.log("");
+    }
+}
 
-/*Test function 
-console.log(attemptEntry("SECRET_123"));
-console.log(attemptEntry("123"));
-console.log(attemptEntry(""));
-console.log(attemptEntry("password"));*/
+automaticTesting();

@@ -27,3 +27,11 @@ Phase 4 Question
 Why is automated testing more reliable than manual testing when verifying that your code “crashes” correctly? What did you learn about the flow of execution when an error is thrown and caught?
 
 Automated testing is more reliable because it removes human error. As your program grows, an automated test suite can continually re-run scenarios to instantly catch if a code change alters error behavior. When an error is thrown, the flow of execution stops immediately; JavaScript searches for a matching try..catch block, jumps straight to it, and handles the error.
+
+
+
+Phase 5 Question
+
+What bugs or unexpected behaviors did you catch while testing your program? If you asked an AI tutor for feedback, what did it suggest, and did you choose to make any changes? Explain your reasoning.
+
+When testing my program with an object or array as a key, it failed by incorrectly throwing a VaultLockedError instead of catching it as an invalid key, though all other functions worked as expected. While Gemini offered several advanced recommendations, I am still learning JavaScript and decided not to overcomplicate my code by completely revamping it with whitelist validation or modularization right now.
