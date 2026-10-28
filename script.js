@@ -10,7 +10,7 @@ class VaultLockedError extends Error {}
 //basic structure of the vault 
 function accessVault(key){
     //check if key is undefined or NaN
-    if (key === undefined || isNaN(key)){
+    if (key === undefined || Number.isNaN(key)){
         throw new InvalidKeyError("Key is missing or corrupted")
     }
     if (key === "SECRET_123"){
@@ -40,11 +40,57 @@ function attemptEntry(key){
     }
 }
 
+function testForError(testKey, expectedError){
+    try{
+        accessVault(testKey);
+        return false;
+    } catch(e){
+        return e instanceof expectedError;
+    }
+}
+
+
+//Test Functions to verify vault's behavior 
+function vaultTest() {
+    //TEST 1: correct key returns 'Access Granted'
+    try {
+        const result = accessVault("SECRET_123");
+        if (result === "Access Granted"){
+            console.log("Test 1 SUCCESSFUL. Correct key succesfully returned.")
+        }else {
+            console.log(`Test 1 FAILED. Unexpetect results, ${result}`);
+        }
+    } catch (e) {
+        console.error(`Test 1 FAILED. Wrong key did not throw expected error message.`);
+    }
+
+    // TEST 2: undefined or NaN key causes InvalidKeyError
+        const resultUndefined = testForError(undefined, InvalidKeyError);
+        const resultNaN = testForError(NaN, InvalidKeyError);
+
+        if (resultUndefined && resultNaN) {
+            console.log("Test 2 PASSED: Invalid key threw InvalidKeyError.")
+        }else {
+            console.error("Test 2 FAILED. Wrong key did not throw expected error message.")
+        }
+    //TEST 3: wrong key causes VaultLockedError 
+        const wrongKey = testForError("wrong_password",VaultLockedError);
+
+        if (wrongKey){
+            console.log("Test 3 PASSED: Wrong key error message thrown- VaultLockedError.")
+        } else {
+            console.log("Test 3 FAILED. Wrong key did not throw expected error message.")
+        }
+}
+
+vaultTest();
 
 
 
-//Test function 
+
+
+/*Test function 
 console.log(attemptEntry("SECRET_123"));
 console.log(attemptEntry("123"));
 console.log(attemptEntry(""));
-console.log(attemptEntry("password"));
+console.log(attemptEntry("password"));*/

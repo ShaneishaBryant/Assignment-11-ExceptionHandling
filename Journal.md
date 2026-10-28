@@ -19,3 +19,11 @@ Phase 3 Question
 How does the finally block behave differently than the catch block? Describe a real-world scenario where a finally block would be critical for a program’s stability.
 
 The finally block is guaranteed to run whether an error occurs or not, whereas the catch block is conditional and only executes if an error is thrown. A real-world scenario where finally is critical is database connection management. If a server opens a connection and fails halfway through, failing to close it can cause connection leaks and crash the server. The finally block ensures resources are safely cleaned up every time.
+
+
+
+Phase 4 Question
+
+Why is automated testing more reliable than manual testing when verifying that your code “crashes” correctly? What did you learn about the flow of execution when an error is thrown and caught?
+
+Automated testing is more reliable because it removes human error. As your program grows, an automated test suite can continually re-run scenarios to instantly catch if a code change alters error behavior. When an error is thrown, the flow of execution stops immediately; JavaScript searches for a matching try..catch block, jumps straight to it, and handles the error.
